@@ -1,21 +1,17 @@
 const { default: mongoose } = require("mongoose");
 const model = require('../model/model.js')
 
-
- 
- 
- class ContenedorMongo {
+class ContenedorMongo {
     constructor() {
     this.collection = model
     }
-    async newProduct(username,nombre, apellido, edad, alias, avatar,time){
-      const insertar =   new this.collection(username,nombre, apellido, edad, alias, avatar,time)
+    async newProduct(email,nombre, apellido, edad, alias, avatar,time){
+      const insertar =   new this.collection(email,nombre, apellido, edad, alias, avatar,time)
      await insertar.save()
-            
     }
   
-    async update(id, title, description, code, price, thumbnail, stock){
-      await this.collection.updateOne({_id:id}, {title, description, code, price, thumbnail, stock})
+    async update(email,nombre, apellido, edad, alias, avatar,time){
+      await this.collection.updateOne({_id:id}, {email,nombre, apellido, edad, alias, avatar,time})
       console.log(this.collection)        
     }
   

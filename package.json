@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "@faker-js/faker": "^7.3.0",
+    "dotenv": "^16.0.1",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "express-session": "^1.17.3",
+    "mongoose": "^6.5.0",
+    "normalizr": "^3.6.2",
+    "socket.io": "^4.5.1"
+  },
+  "name": "consinga-11",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  },
+  "scripts": {
+    "start": "nodemon src/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

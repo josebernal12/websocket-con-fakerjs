@@ -18,10 +18,9 @@ const avatarInput  = document.querySelector('#avatarInput')
 
 
 //SUBMIT CHAT
-formMessage.addEventListener('submit', event => {
-  event.preventDefault()
+function sendMessage() {
 
-  const username = usernameInput.value
+  const email = usernameInput.value
   const nombre = nombreInput.value
   const apellido = apellidoInput.value
   const edad = edadInput.value
@@ -36,17 +35,31 @@ formMessage.addEventListener('submit', event => {
 
 
 
-  socket.emit('cliente:mensaje', { username, mensaje, resultado, time, nombre , apellido, edad, alias, avatar})
-})
+  socket.emit('client:messageNormalizar', {author: { email,nombre,apellido,edad,alias,avatar}, comment: {text:mensaje, time:time,result:resultado}})
+}
+
+function renderMessages(messagesArray) {
+  try {
+      const html = messagesArray.map(messageInfo => {
+          return(`<div>
+              <strong style="color: blue;" >${messageInfo.author.email}</strong>[
+              <span style="color: brown;">${messageInfo.comment.time}</span>]:
+              <em style="color: green;font-style: italic;">${messageInfo.comment.text}</em> </div>`)
+      }).join(" ");
+
+      totalMessages.innerHTML = html
+  } catch(error) {
+      console.log(`Hubo un error ${error}`)
+  }
+}
 
 
-socket.on('server:mensaje', data => {
-  messagePool.innerHTML = ""
-
-  data.forEach(message => {
-    messagePool.innerHTML += `<h2>  <b style= 'color: blue'> ${message.username}:  <b style= 'color: red'> [${message.resultado}]:  [${message.time}]:  <b style= 'color: green'> ${message.mensaje} </h2>`
-
-  })
 
 
+
+
+formMessage.addEventListener('submit', event => {
+  event.preventDefault()
+  sendMessage()
+  messageInput.value = "" 
 })
